@@ -36,11 +36,10 @@ fi
 # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
 script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 # exec: replace current process with chezmoi init
-exec "$chezmoi" -S ~/.local/share/bootstrap init --apply "--source=$script_dir"
+exec "$chezmoi" -S ~/.local/share/bootstrap init --apply https://github.com/tacgnol/bootstrap.git
 
 if [ -d "$HOME/.local/share/chezmoi/.git" ]; then
   echo "🚸  chezmoi already initialized"
-  echo "    Reinitialize with: 'chezmoi init https://github.com/tacgnol/dotfiles.git'"
 else
   echo "🚀  Initialize dotfiles with:"
   echo "    chezmoi init https://github.com/tacgnol/bootstrap.git"
