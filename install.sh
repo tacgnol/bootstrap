@@ -25,9 +25,9 @@ fi
 
 if [ ! "$(command -v age)" ]; then
   if [ "$(command -v curl)" ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/tacgnol/bootstrap/main/scripts/install.sh)" -- -b "$bin_dir"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/tacgnol/bootstrap/main/scripts/age.sh)" -- -b "$bin_dir"
   else
-    sh -c "$(wget -qO-     https://raw.githubusercontent.com/tacgnol/bootstrap/main/scripts/install.sh)" -- -b "$bin_dir"
+    sh -c "$(wget -qO- https://raw.githubusercontent.com/tacgnol/bootstrap/main/scripts/.sh)" -- -b "$bin_dir"
   fi
 else
   age=age
@@ -36,14 +36,14 @@ fi
 # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
 script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 # exec: replace current process with chezmoi init
-exec "$chezmoi" init --apply "--source=$script_dir"
+exec "$chezmoi" -S ~/.local/share/bootstrap init --apply "--source=$script_dir"
 
 if [ -d "$HOME/.local/share/chezmoi/.git" ]; then
   echo "🚸  chezmoi already initialized"
   echo "    Reinitialize with: 'chezmoi init https://github.com/tacgnol/dotfiles.git'"
 else
   echo "🚀  Initialize dotfiles with:"
-  echo "    chezmoi -S ~/.local/share/bootstrap init https://github.com/tacgnol/bootstrap.git"
+  echo "    chezmoi init https://github.com/tacgnol/bootstrap.git"
 fi
 
 echo ""
