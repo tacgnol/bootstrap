@@ -24,6 +24,7 @@ else
 fi
 
 if [ ! "$(command -v age)" ]; then
+  age="$bin_dir/age"
   if [ "$(command -v curl)" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/tacgnol/bootstrap/main/scripts/age.sh)" -- -b "$bin_dir"
   else
