@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ ! -f "${HOME}/.cache/bootstrap/key.txt" ]; then
+    mkdir -p ${HOME/.cache/bootstrap}
+    age --decrypt --output "${HOME}/.cache/bootstrap/key.txt" "{{ .chezmoi.sourceDir }}/key.txt.age"
+    chmod 600 "${HOME}/.cache/bootstrap/key.txt"
+fi
