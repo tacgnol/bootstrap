@@ -23,6 +23,16 @@ else
   chezmoi=chezmoi
 fi
 
+if [ ! "$(command -v age)" ]; then
+  if [ "$(command -v curl)" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/tacgnol/bootstrap/main/scripts/install.sh)" -- -b "$bin_dir"
+  else
+    sh -c "$(wget -qO-     https://raw.githubusercontent.com/tacgnol/bootstrap/main/scripts/install.sh)" -- -b "$bin_dir"
+  fi
+else
+  age=age
+fi
+
 # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
 script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 # exec: replace current process with chezmoi init
