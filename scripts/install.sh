@@ -8,8 +8,9 @@ read -n 1 -r -s -p $'    Press any key to continue or Ctrl+C to abort...\n\n'
 
 set -e # -e: exit on error
 
+bin_dir="$HOME/.local/bin"
+
 if [ ! "$(command -v chezmoi)" ]; then
-  bin_dir="$HOME/.local/bin"
   chezmoi="$bin_dir/chezmoi"
   if [ "$(command -v curl)" ]; then
     sh -c "$(curl -fsSL https://git.io/chezmoi)" -- -b "$bin_dir"
